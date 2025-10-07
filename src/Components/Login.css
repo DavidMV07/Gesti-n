@@ -1,0 +1,40 @@
+.Login__Container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.Login__Container input{
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px;
+}
+.Login__Container .Btn__Submit{
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.Login__Container .Btn__Submit:hover{
+  background-color: #45a049;
+}
+.Login__Container h2{
+  margin-bottom: 20px;
+}
+.Login__Container .Btn__Register{
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+}
