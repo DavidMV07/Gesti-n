@@ -20,6 +20,7 @@ function UsersPage() {
       const data = await apiFetch("/api/admin/users");
       setUsers(data);
     } catch (err) {
+      console.error(err);
       setError("No se pudieron cargar los usuarios");
     } finally {
       setLoading(false);

@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
 import "../styles/Register.css";
 
-function Register({ onRegister }) {
+function Register() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +26,7 @@ function Register({ onRegister }) {
       } else {
         setError(data.message || "Error al registrar");
       }
-    } catch (err) {
+    } catch {
       setError("Error de conexión con el servidor");
     }
   };
@@ -35,33 +34,23 @@ function Register({ onRegister }) {
   return (
     <div className="register-container">
       <div className="register-card">
-        <h2>Registrarse</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            placeholder="Correo"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Contraseña"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type="submit">
-            Registrar
-          </button>
-          <button
-            type="button"
-            className="secondary"
-            onClick={() => navigate("/login")}
-          >
-            Volver a Login
-          </button>
-          {error && <div className="message error">{error}</div>}
-          {success && <div className="message success">{success}</div>}
-        </form>
+          <h2>Registrarse</h2>
+          <form onSubmit={handleSubmit} className="Form__Register">
+            <label htmlFor="Nombres">Nombres: </label>
+            <input type="text" id="Nombres" name="nombres" placeholder="David Esteban" /*value={nombres} onChange={(e) => setNombres(e.target.value)}*//>
+            <label htmlFor="Apellidos">Apellidos: </label>
+            <input type="text" id="Apellidos" name="apellidos" placeholder="Mellizo Vidal" /*value={apellidos} onChange={(e) => setApellidos(e.target.value)}*//>
+            <label htmlFor="Email">Correo: </label>
+            <input type="Email" id="Email" name="email" placeholder="ejemplo@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+            <label htmlFor="password">Contraseña: </label>
+            <input type="password" id="password" name="password" placeholder="Tu contraseña" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+            <div className="Register__Buttons">
+              <button type="submit">Registrar</button>
+              <button type="button" className="secondary" onClick={() => navigate("/login")}>Volver a Login</button>
+            </div>
+            {error && <div className="message error">{error}</div>}
+            {success && <div className="message success">{success}</div>}
+          </form>
       </div>
     </div>
   );

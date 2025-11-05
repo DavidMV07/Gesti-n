@@ -1,6 +1,78 @@
-*{
-    font-family: 'Roboto Condensed', sans-serif;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+/* https://piccalil.li/blog/a-more-modern-css-reset/ */
+
+/* Normas de dimensionamiento de las cajas */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+/* Evitar que se infle el tamaño de letra */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+/* Eliminar el margen por defecto en favor de un mejor control en CSS de autoría */
+body, h1, h2, h3, h4, p,
+figure, blockquote, dl, dd {
+  margin-block-end: 0;
+}
+
+/* Eliminar estilos de lista en elementos ul, ol con rol de lista, lo que sugiere que se eliminará el estilo por defecto */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Establecer los valores predeterminados del cuerpo central */
+body {
+  min-height: 100dvh;
+  line-height: 1.5;
+}
+
+/* Reduzca la altura de las líneas de los títulos y los elementos interactivos. */
+h1, h2, h3, h4,
+button, input, label {
+  line-height: 1.1;
+}
+
+/* Equilibrar el ajuste del texto en los títulos */
+h1, h2,
+h3, h4 {
+  text-wrap: balance;
+}
+
+/* Los elementos A que no tienen clase reciben estilos por defecto */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+/* Facilitar el trabajo con imágenes */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Heredar fuentes para entradas y botones */
+input, button,
+textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Asegúrese de que las áreas de texto sin el atributo rows no sean minúsculas */
+textarea:not([rows]) {
+  min-height: 3em;
+}
+
+/* Cualquier cosa a la que se haya anclado debe tener un margen de desplazamiento adicional */
+:target {
+  scroll-margin-block: 5ex;
 }

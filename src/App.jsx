@@ -1,5 +1,3 @@
-
-import 'reset-css-pro';
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./Pages/Header";
@@ -9,10 +7,7 @@ import Register from "./Pages/Register";
 import UsersPage from "./Pages/UsersPage";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import AdminUsers from './Pages/AdminUsers';
-
-function About() {
-  return <div style={{ textAlign: "center", marginTop: "40px" }}><h2>Acerca de nosotros</h2></div>;
-}
+import "./App.css"
 
 function ProtectedAdmin({ children }) {
   const { user, loading } = useAuth();
@@ -40,7 +35,6 @@ function App() {
               <UsersPage />
             </ProtectedAdmin>
           } />
-          <Route path="/about" element={<About />} />
         </Routes>
       </Router>
     </AuthProvider>

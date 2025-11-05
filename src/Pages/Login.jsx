@@ -19,7 +19,7 @@ function Login({ onLogin }) {
       });
       const data = await res.json();
       if (res.ok && data.token) {
-        localStorage.setItem("token", data.token); 
+        localStorage.setItem("token", data.token);
         onLogin();
         navigate("/dashboard");
       } else {
@@ -32,26 +32,20 @@ function Login({ onLogin }) {
 
   return (
     <div className="Login__Container">
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Correo"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-        />
-        <button type="submit" className="Btn__Submit">Entrar</button>
-        <button type="button" className="Btn__Register" onClick={() => navigate("/register")}>
-          Registrarse
-        </button>
-        {error && <div style={{ color: "red", marginTop: "10px" }}>{error}</div>}
-      </form>
+      <div className="Login">
+          <h2>Iniciar Sesión</h2>
+          <form onSubmit={handleSubmit} className="Form__Login">
+            <label htmlFor="email">Correo: </label>
+            <input type="email" id="email" placeholder="ejemplo@gmail.com" value={email} onChange={e => setEmail(e.target.value)}/>
+            <label htmlFor="password">Contraseña: </label>
+            <input type="password" id="password" placeholder="Tu contraseña" value={password} onChange={e => setPassword(e.target.value)}/>
+            <div className="Login__Buttons">
+              <button type="submit" className="Btn__Submit">Entrar</button>
+              <button type="button" className="Btn__Register" onClick={() => navigate("/register")}>Registrarse</button>
+            </div>
+            {error && <div style={{ color: "red", marginTop: "10px" }}>{error}</div>}
+          </form>
+      </div>
     </div>
   );
 }

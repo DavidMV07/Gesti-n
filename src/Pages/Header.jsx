@@ -1,40 +1,12 @@
-import React from "react";
-import { useLocation, Link } from "react-router-dom";
 import "../styles/Header.css";
 
-function Header() {
-  const location = useLocation();
-  const simpleRoutes = ["/login", "/register", "/"];
-  const isSimple = simpleRoutes.includes(location.pathname);
-
+function Header(){
   return (
     <header className="header">
-      <div className="header__logo">
-        <img
-          src="/logo-universidad.png"
-          alt="Logo Universidad"
-        />
-        <span className="header__title">Universidad Ejemplo</span>
+      <div className="titulo">
+        <h1>S.I.G.A</h1>
+        <p>Sistema Integrado de Gestión Académica</p>
       </div>
-      <nav className="header__nav">
-        {isSimple ? (
-          <Link to="/about" className="header__link">
-            Acerca de nosotros
-          </Link>
-        ) : (
-          <>
-            <Link to="/dashboard" className="header__link">
-              Dashboard
-            </Link>
-            <Link to="/profile" className="header__link">
-              Perfil
-            </Link>
-            <Link to="/about" className="header__link">
-              Acerca de nosotros
-            </Link>
-          </>
-        )}
-      </nav>
     </header>
   );
 }
