@@ -1,0 +1,120 @@
+.register-container {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 320px;
+  max-width: 350px;
+  margin: auto;
+  margin-top: 8vh;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+}
+
+.register-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-card h2 {
+  margin-bottom: 24px;
+  font-size: 2rem;
+  color: #2c3e50;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.register-card input {
+  margin: 12px 0;
+  padding: 12px;
+  border: 1px solid #dfe6e9;
+  border-radius: 6px;
+  width: 100%;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  background: #f9f9f9;
+}
+
+.register-card input:focus {
+  border-color: #4CAF50;
+  outline: none;
+  background: #fff;
+}
+
+.register-card button[type="submit"] {
+  width: 100%;
+  background: linear-gradient(90deg, #4CAF50 0%, #43a047 100%);
+  color: white;
+  border: none;
+  padding: 12px 0;
+  font-size: 1rem;
+  margin: 14px 0 8px 0;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.register-card button[type="submit"]:hover {
+  background: linear-gradient(90deg, #43a047 0%, #388e3c 100%);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.register-card .secondary {
+  width: 100%;
+  background: linear-gradient(90deg, #008CBA 0%, #005f73 100%);
+  color: white;
+  border: none;
+  padding: 12px 0;
+  font-size: 1rem;
+  margin-bottom: 0;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.register-card .secondary:hover {
+  background: linear-gradient(90deg, #005f73 0%, #008CBA 100%);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.message.error {
+  color: #e74c3c !important;
+  font-size: 0.95rem;
+  margin-top: 10px;
+  text-align: center;
+  background: #fdecea;
+  border-radius: 4px;
+  padding: 6px 0;
+  width: 100%;
+}
+
+.message.success {
+  color: #43a047 !important;
+  font-size: 0.95rem;
+  margin-top: 10px;
+  text-align: center;
+  background: #eafaf1;
+  border-radius: 4px;
+  padding: 6px 0;
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .register-container {
+    padding: 24px 10px;
+    min-width: 90vw;
+    max-width: 98vw;
+  }
+  .register-card h2 {
+    font-size: 1.4rem;
+  }
+}
