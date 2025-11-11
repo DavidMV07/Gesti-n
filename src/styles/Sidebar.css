@@ -1,0 +1,133 @@
+/* ==== NAVBAR ESTILO GLASSMORPHISM ==== */
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  transition: all 0.4s ease;
+}
+
+/* Efecto al hacer scroll */
+.navbar.scrolled {
+  background: rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Logo */
+.titulo {
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  user-select: none;
+  transition: all 0.3s ease;
+  color: #facc15;
+}
+
+.titulo:hover {
+  color: #ffb700;
+  text-shadow: 0 0 15px #f0a00b;
+}
+
+.titulo p{
+  font-size: 0.9rem;
+  color: #d1d5db;
+  margin: 2px 0 0;
+}
+
+.titulo p:hover{
+  color: #a8acb0;
+  text-shadow: #7c8084;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  transition: all 0.3s ease;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #ffffffcc;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-links li a::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  border-radius: 2px;
+  transition: transform 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #fff;
+}
+
+.nav-links li a:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* ==== BOTÓN MENÚ (oculto en escritorio) ==== */
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+}
+
+.meta{
+  color: white;
+}
+/* ==== RESPONSIVE ==== */
+@media (max-width: 850px) {
+  .navbar {
+    width: 90%;
+    padding: 10px 20px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(20px);
+    border-radius: 15px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 25px;
+    width: 220px;
+    transform: translateY(-20px);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .nav-links.open {
+    opacity: 1;
+    transform: translateY(10px);
+    pointer-events: all;
+    transition: all 0.4s ease;
+  }
+}

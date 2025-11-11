@@ -1,25 +1,4 @@
 .header{
   background-color: #0f172a;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 40px;
-  max-width: 100%;
   height: 10em;
-}
-.titulo{
-  text-align: center;
-  flex-grow: 1;
-}
-.titulo h1 {
-  margin: 0;
-  color: #facc15; /* amarillo */
-  font-size: 1.8rem;
-  letter-spacing: 2px;
-}
-.titulo p {
-  font-size: 0.9rem;
-  color: #d1d5db;
-  margin: 2px 0 0;
 }

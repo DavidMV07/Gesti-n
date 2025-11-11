@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./Pages/Header";
 import Dashboard from "./Pages/Dashboard";
-import Login from "./Pages/Login";
-import Register from "./Pages/Register";
-import UsersPage from "./Pages/UsersPage";
+import Login from "./Pages/Login&Register/Login";
+import Register from "./Pages/Login&Register/Register";
+import UsersPage from "./Pages/Admin/UsersPage";
 import { AuthProvider, useAuth } from "./context/AuthContext";
-import AdminUsers from './Pages/AdminUsers';
+import AdminUsers from './Pages/Admin/AdminUsers';
 import "./App.css"
 
 function ProtectedAdmin({ children }) {

@@ -1,12 +1,12 @@
+import React, { useState } from "react";
+import Sidebar from "../Components/Sidebar";
 import "../styles/Header.css";
 
 function Header(){
+  const [collapsed, setCollapsed] = useState(false);
   return (
     <header className="header">
-      <div className="titulo">
-        <h1>S.I.G.A</h1>
-        <p>Sistema Integrado de Gestión Académica</p>
-      </div>
+      <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(s => !s)} />
     </header>
   );
 }

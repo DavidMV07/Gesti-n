@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import apiFetch from "../utils/api";
-import "../styles/AdminUsers.css";
+import apiFetch from "../../utils/api";
+import "../../styles/AdminUsers.css"
 
 function UsersPage() {
   const [users, setUsers] = useState([]);
