@@ -1,58 +1,42 @@
-import React, { createContext, useEffect, useState, useContext } from "react";
-import apiFetch from "../utils/api";
-
-const AuthContext = createContext();
+// src/context/AuthContext.jsx
+import React, { createContext, useState, useEffect } from "react";
+export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [token, setToken] = useState(() => localStorage.getItem("token"));
+  const [user, setUser] = useState(() => {
+    try { return JSON.parse(localStorage.getItem("user")); } catch(e){ return null; }
+  });
 
-  // 🔹 Cargar usuario autenticado (si existe token)
-  const loadUser = async () => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      setUser(null);
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const data = await apiFetch("/api/auth/me");
-      // Aseguramos que tenga el campo role
-      if (data && data.role) {
-        setUser(data);
-      } else {
-        console.warn("El usuario no tiene campo 'role' en /api/auth/me");
-        setUser(null);
-      }
-    } catch (error) {
-      console.error("Error al cargar usuario:", error);
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // 🔹 Ejecutar al iniciar la app
-  useEffect(() => {
-    loadUser();
+  useEffect(()=> {
+    // opcional: validar token al arrancar (llamar /auth/validate si lo tienes)
   }, []);
 
-  // 🔹 Cerrar sesión
+  const login = ({ token: t, user: u }) => {
+    localStorage.setItem("token", t);
+    localStorage.setItem("user", JSON.stringify(u || null));
+    setToken(t);
+    setUser(u || null);
+  };
+
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setToken(null);
     setUser(null);
   };
 
+  const updateUser = (u) => {
+    // update user in context and localStorage without changing token
+    try {
+      localStorage.setItem('user', JSON.stringify(u || null));
+      setUser(u || null);
+    } catch(e){ console.error('updateUser error', e); }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, reload: loadUser, logout }}>
+    <AuthContext.Provider value={{ token, user, login, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );
-}
-
-// Hook personalizado para acceder al contexto
-export function useAuth() {
-  return useContext(AuthContext);
 }

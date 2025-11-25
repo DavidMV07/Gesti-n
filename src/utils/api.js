@@ -14,7 +14,16 @@ export async function apiFetch(path, opts = {}) {
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
   };
 
-  const res = await fetch(url, { ...opts, headers });
+  // DEBUG: mostrar la URL usada (temporal)
+  // console.log("apiFetch ->", url);
+
+  let res;
+  try {
+    res = await fetch(url, { ...opts, headers });
+  } catch (err) {
+    // Error de red / conexión (eg. ECONNREFUSED)
+    throw { message: "Network error", url, original: err };
+  }
 
   let body = {};
   try {
@@ -25,7 +34,7 @@ export async function apiFetch(path, opts = {}) {
   }
 
   if (!res.ok) {
-    throw { status: res.status, body };
+    throw { status: res.status, body, url };
   }
 
   return body;

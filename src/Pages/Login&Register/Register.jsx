@@ -5,6 +5,8 @@ import "../../styles/Register.css";
 function Register() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -17,7 +19,7 @@ function Register() {
       const res = await fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ firstName, lastName, email, password }),
       });
       const data = await res.json();
       if (res.ok) {
@@ -37,9 +39,9 @@ function Register() {
           <h2>Registrarse</h2>
           <form onSubmit={handleSubmit} className="Form__Register">
             <label htmlFor="Nombres">Nombres: </label>
-            <input type="text" id="Nombres" name="nombres" placeholder="David Esteban" /*value={nombres} onChange={(e) => setNombres(e.target.value)}*//>
+            <input type="text" id="Nombres" name="nombres" placeholder="David Esteban" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
             <label htmlFor="Apellidos">Apellidos: </label>
-            <input type="text" id="Apellidos" name="apellidos" placeholder="Mellizo Vidal" /*value={apellidos} onChange={(e) => setApellidos(e.target.value)}*//>
+            <input type="text" id="Apellidos" name="apellidos" placeholder="Mellizo Vidal" value={lastName} onChange={(e) => setLastName(e.target.value)} />
             <label htmlFor="Email">Correo: </label>
             <input type="Email" id="Email" name="email" placeholder="ejemplo@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} required/>
             <label htmlFor="password">Contraseña: </label>

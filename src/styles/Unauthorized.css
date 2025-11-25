@@ -1,0 +1,4 @@
+.unauthorized-page{padding:2rem;text-align:center}
+.unauthorized-page h2{color:#c0392b}
+.unauthorized-actions{margin-top:1rem;display:flex;gap:1rem;justify-content:center}
+.unauthorized-actions a{padding:0.5rem 1rem;background:#2d74c4;color:white;border-radius:4px;text-decoration:none}

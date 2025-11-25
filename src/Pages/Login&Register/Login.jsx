@@ -1,32 +1,42 @@
 import "../../styles/Login.css";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import apiFetch from "../../utils/api";
+import { AuthContext } from "../../context/AuthContext";
 
-function Login({ onLogin }) {
+function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const data = await apiFetch("/api/auth/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      const data = await res.json();
-      if (res.ok && data.token) {
-        localStorage.setItem("token", data.token);
-        onLogin();
-        navigate("/dashboard");
+
+      if (data && data.token) {
+        // Usar contexto para guardar token/usuario
+        if (typeof login === "function") {
+          login({ token: data.token, user: data.user || { role: data.role } });
+        } else {
+          localStorage.setItem("token", data.token);
+          if (data.user) localStorage.setItem("user", JSON.stringify(data.user));
+        }
+        navigate("/RoleDashboard");
       } else {
         setError(data.message || "Credenciales incorrectas");
       }
     } catch (err) {
-      setError("Error de conexión con el servidor");
+      // Mostrar detalles en consola para depuración
+      console.error("Login error:", err);
+      const clientMessage = err?.body?.message || err?.message || (err?.original && err.original.message) || "Error de conexión con el servidor";
+      setError(clientMessage);
     }
   };
 
@@ -40,7 +50,7 @@ function Login({ onLogin }) {
             <label htmlFor="password">Contraseña: </label>
             <input type="password" id="password" placeholder="Tu contraseña" value={password} onChange={e => setPassword(e.target.value)}/>
             <div className="Login__Buttons">
-              <button type="submit" className="Btn__Submit">Entrar</button>
+              <button type="submit" className="Btn__Submit" onClick={() => navigate("/RoleDashboard")}>Entrar</button>
               <button type="button" className="Btn__Register" onClick={() => navigate("/register")}>Registrarse</button>
             </div>
             {error && <div style={{ color: "red", marginTop: "10px" }}>{error}</div>}
