@@ -21,13 +21,7 @@ function Login() {
       });
 
       if (data && data.token) {
-        // Usar contexto para guardar token/usuario
-        if (typeof login === "function") {
-          login({ token: data.token, user: data.user || { role: data.role } });
-        } else {
-          localStorage.setItem("token", data.token);
-          if (data.user) localStorage.setItem("user", JSON.stringify(data.user));
-        }
+        login({ token: data.token, user: data.user });
         navigate("/RoleDashboard");
       } else {
         setError(data.message || "Credenciales incorrectas");
@@ -50,7 +44,7 @@ function Login() {
             <label htmlFor="password">Contraseña: </label>
             <input type="password" id="password" placeholder="Tu contraseña" value={password} onChange={e => setPassword(e.target.value)}/>
             <div className="Login__Buttons">
-              <button type="submit" className="Btn__Submit" onClick={() => navigate("/RoleDashboard")}>Entrar</button>
+              <button type="submit" className="Btn__Submit">Entrar</button>
               <button type="button" className="Btn__Register" onClick={() => navigate("/register")}>Registrarse</button>
             </div>
             {error && <div style={{ color: "red", marginTop: "10px" }}>{error}</div>}

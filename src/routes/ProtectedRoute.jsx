@@ -1,4 +1,3 @@
-
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Navigate, useLocation } from "react-router-dom";
@@ -12,8 +11,16 @@ export default function ProtectedRoute({ children, role }) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  // Si quieres control por roles (admin)
-  if (role && (!user || user.role !== role)) {
+  // Esperar a que user exista antes de validar roles
+  if (!user) {
+    return <div>Cargando...</div>;
+  }
+
+  // Normalizar roles
+  const currentRole = (user.role || "").toLowerCase();
+  const requiredRole = (role || "").toLowerCase();
+
+  if (requiredRole && currentRole !== requiredRole) {
     return <Navigate to="/unauthorized" replace />;
   }
 
