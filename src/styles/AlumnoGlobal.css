@@ -1,0 +1,420 @@
+/* ===== Student Dashboard ===== */
+.dashboard-container {
+  width: 100%;
+  padding: 20px 40px;
+  font-family: 'Inter', sans-serif;
+  color: #0a0a0a;
+}
+
+/* ===== TÍTULO ===== */
+.main-content h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+/* ===== TARJETAS DEL RESUMEN ===== */
+.student-summary {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.summary-card {
+  flex: 1;
+  background: #4b5563; /* gris oscuro */
+  color: white;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform .15s ease-in-out;
+}
+
+.summary-card:hover {
+  transform: translateY(-3px);
+}
+
+.summary-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #fbbf24; /* dorado */
+}
+
+.summary-card p {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* ===== SECCIÓN CURSOS ===== */
+.courses-section h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.course-list {
+  list-style: none;
+  padding: 0;
+}
+
+.course-card {
+  background: #ffffff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform .15s ease-in-out, box-shadow .2s;
+}
+
+.course-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}
+
+.course-card h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 5px;
+}
+
+.course-card p {
+  font-size: 1rem;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+/* ===== BOTÓN VER CURSO ===== */
+.btn-ver {
+  display: inline-block;
+  padding: 10px 16px;
+  background: #1f2937; /* gris oscuro elegante */
+  color: #fbbf24;      /* dorado */
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .2s;
+}
+
+.btn-ver:hover {
+  background: #111827;
+}
+
+/* ===== CONFIGURACIÓN DE CUENTA ===== */
+.account-settings {
+  margin-top: 40px;
+}
+
+.account-info p {
+  margin: 6px 0;
+  font-size: 1rem;
+}
+
+.edit-btn {
+  background: #fbbf24;
+  color: #1f2937;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity .2s ease-in-out;
+}
+
+.edit-btn:hover {
+  opacity: 0.8;
+}
+
+/* ===== FORMULARIO DE CUENTA ===== */
+.account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+  max-width: 350px;
+}
+
+.account-form input {
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.save-btn {
+  background: #1f2937;
+  color: #fbbf24;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: #ef4444;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+
+/*========== Course Alumno ==========*/
+.student-courses-container {
+  padding: 30px;
+}
+
+.student-courses-container h1 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.course-card {
+  background: #2b3244;
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+.course-card h3 {
+  color: #f1c40f;
+  margin-bottom: 10px;
+}
+
+.course-card p {
+  margin-bottom: 10px;
+  color: #ccc;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.enroll {
+  background: #1abc9c;
+}
+
+.enrolled {
+  background: #7f8c8d;
+  cursor: not-allowed;
+}
+
+/*========== Course Detail Alumno ==========*/
+.course-detail {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+/* Titulos principales */
+.course-detail h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #0d3b66;
+  border-bottom: 2px solid #0d3b66;
+  padding-bottom: 0.3rem;
+}
+
+/* Subtítulos */
+.course-detail h3 {
+  font-size: 1.3rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #05668d;
+  border-bottom: 1px dashed #05668d;
+  padding-bottom: 0.2rem;
+}
+
+/* Párrafos */
+.course-detail p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Listas */
+.course-detail ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Ítems de lista */
+.course-detail li {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+/* Resaltar valores importantes */
+.course-detail li strong {
+  color: #028090;
+}
+
+/* Efecto de tarjetas para profesores y compañeros */
+.course-detail ul li {
+  background-color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.course-detail ul li:hover {
+  transform: translateY(-2px);
+}
+
+/* Adaptabilidad para móviles */
+@media (max-width: 600px) {
+  .course-detail {
+    padding: 1rem;
+  }
+
+  .course-detail h2 {
+    font-size: 1.5rem;
+  }
+
+  .course-detail h3 {
+    font-size: 1.1rem;
+  }
+}
+
+.my-enrollments {
+  padding: 30px 40px;
+  font-family: 'Inter', sans-serif;
+  color: #f1f1f1;
+}
+
+.my-enrollments h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fbbf24;
+  margin-bottom: 20px;
+}
+
+.enrollments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.enrollment-card {
+  background: #2b3244;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.enrollment-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.enrollment-card h3 {
+  color: #fbbf24;
+  margin-bottom: 8px;
+}
+
+.enrollment-card p {
+  margin-bottom: 10px;
+  color: #e5e7eb;
+}
+
+.card-section {
+  margin-top: 12px;
+}
+
+.grades-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.grades-list li {
+  margin-bottom: 10px;
+}
+
+.grade-name {
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: block;
+  color: #fbbf24;
+}
+
+.grade-bar-container {
+  background: #1f2937;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 20px;
+}
+
+.grade-bar {
+  height: 100%;
+  background: #1abc9c;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 6px;
+  color: white;
+  font-weight: 600;
+  transition: width 0.4s ease;
+  border-radius: 8px 0 0 8px;
+}
+
+.grade-bar span.grade-value {
+  font-size: 0.85rem;
+}
+
+.classmates-list {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.loading, .error {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fbbf24;
+  margin-top: 20px;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .my-enrollments {
+    padding: 20px;
+  }
+
+  .enrollment-card {
+    padding: 15px;
+  }
+}
+

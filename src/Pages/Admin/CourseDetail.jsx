@@ -12,8 +12,6 @@ export default function CourseDetail(){
   const { user } = useContext(AuthContext);
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [myEnrollmentId, setMyEnrollmentId] = useState(null);
-  const [courseEnrollments, setCourseEnrollments] = useState([]);
-  const [gradeInputs, setGradeInputs] = useState({}); // { enrollmentId: { name, value } }
 
   const fetchCourse = useCallback(async () => {
     try { const data = await apiFetch(`/api/courses/${id}`, { method: 'GET' }); setCourse(data); }
@@ -41,19 +39,6 @@ export default function CourseDetail(){
       }
     }
     fetchMy();
-  }, [user, id]);
-
-  useEffect(()=>{
-    // If user is teacher/admin, load enrollments for this course
-    const fetchCourseEnrolls = async () => {
-      if(!user) return;
-      if(user.role !== 'profesor' && user.role !== 'admin') return;
-      try {
-        const res = await apiFetch(`/api/enrollments/course/${id}`);
-        setCourseEnrollments(res || []);
-      } catch(err){ console.error(err); }
-    };
-    fetchCourseEnrolls();
   }, [user, id]);
 
   const handleAdd = async () => {
@@ -94,28 +79,11 @@ export default function CourseDetail(){
     } catch (err) { console.error(err); alert('Error al desmatricular'); }
   };
 
-  const handleGradeInputChange = (enrollmentId, field, value) => {
-    setGradeInputs(prev => ({ ...prev, [enrollmentId]: { ...(prev[enrollmentId]||{}), [field]: value } }));
-  };
 
-  const handleAddGrade = async (enrollment) => {
-    const input = gradeInputs[enrollment._id];
-    if(!input || !input.name) { alert('Ingresa nombre de la evaluación'); return; }
-    const val = Number(input.value || 0);
-    const newGrade = { name: input.name, value: val };
-    const updatedGrades = [ ...(enrollment.grades || []), newGrade ];
-    try {
-      await apiFetch(`/api/enrollments/${enrollment._id}/grades`, { method: 'PUT', body: JSON.stringify({ grades: updatedGrades }) });
-      // refresh
-      const res = await apiFetch(`/api/enrollments/course/${id}`);
-      setCourseEnrollments(res || []);
-      setGradeInputs(prev => ({ ...prev, [enrollment._id]: { name: '', value: '' } }));
-    } catch(err){ console.error(err); alert('Error al actualizar calificaciones'); }
-  };
 
   return (
     <div className="admin-container">
-      <h2>Curso: {course?.title}</h2>
+      <h2>{course?.title}</h2>
       <p>{course?.description}</p>
 
       {/* Enroll actions for students */}
@@ -200,34 +168,6 @@ export default function CourseDetail(){
           </button>
         </div>
       </div>
-
-      {/* Teacher view: students and grades */}
-      {(user && (user.role === 'profesor' || user.role === 'admin')) && (
-        <div style={{ marginTop: 24 }}>
-          <h3>Estudiantes matriculados</h3>
-          {courseEnrollments.length === 0 && <p>No hay estudiantes matriculados.</p>}
-          <ul>
-            {courseEnrollments.map(enr => (
-              <li key={enr._id} style={{ marginBottom: 12 }}>
-                <div><strong>{enr.student.firstName || ''} {enr.student.lastName || ''}</strong> ({enr.student.email})</div>
-                <div>
-                  <strong>Calificaciones:</strong>
-                  {enr.grades && enr.grades.length ? (
-                    <ul>
-                      {enr.grades.map((g, i) => <li key={i}>{g.name}: {g.value}</li>)}
-                    </ul>
-                  ) : <p>No hay calificaciones.</p>}
-                </div>
-                <div style={{ marginTop: 8 }}>
-                  <input placeholder="Nombre evaluación" value={(gradeInputs[enr._id]||{}).name||''} onChange={e => handleGradeInputChange(enr._id,'name', e.target.value)} />
-                  <input placeholder="Valor" type="number" value={(gradeInputs[enr._id]||{}).value||''} onChange={e => handleGradeInputChange(enr._id,'value', e.target.value)} style={{ width: 100, marginLeft: 8 }} />
-                  <button onClick={() => handleAddGrade(enr)} style={{ marginLeft: 8 }}>Agregar calificación</button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 }

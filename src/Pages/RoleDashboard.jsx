@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import AdminDashboard from './Admin/AdminDashboard';
 import StudentDashboard from './Student/StudentDashboard';
-import ProfessorDashboard from './Professor/ProfessorDashboard';
+import ProfessorDashboard from './Profesor/ProfesorDashboard';
 
 export default function RoleDashboard(){
   const { user } = useContext(AuthContext);
