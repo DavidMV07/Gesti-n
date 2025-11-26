@@ -1,0 +1,192 @@
+/*======== Professor Course Detail ========*/
+
+.prof-course-container {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(10px);
+  color: #f8fafc;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 1000px;
+  border-radius: 20px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Títulos */
+.prof-course-container h2 {
+  text-align: center;
+  color: #facc15;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 8px rgba(250, 204, 21, 0.4);
+}
+
+.prof-course-container h3 {
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  color: #facc15;
+}
+
+/*======== FILTRO ========*/
+.prof-filter-input {
+  width: 100%;
+  max-width: 350px;
+  padding: 0.8rem;
+  border-radius: 12px;
+  background: rgba(30, 41, 59, 0.6);
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  margin-top: 0.6rem;
+  transition: border 0.2s ease, background 0.2s ease;
+}
+
+.prof-filter-input:focus {
+  border-color: #facc15;
+  background: rgba(30, 41, 59, 0.8);
+  outline: none;
+}
+
+/*======== TABLA ========*/
+.prof-table {
+  width: 100%;
+  margin-top: 1.5rem;
+  border-collapse: collapse;
+  background: rgba(30, 41, 59, 0.6);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
+}
+
+.prof-table thead {
+  background: rgba(250, 204, 21, 0.1);
+}
+
+.prof-table th {
+  background: rgba(15, 23, 42, 0.9);
+  color: #facc15;
+  padding: 1rem;
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.prof-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  font-size: 0.95rem;
+}
+
+.prof-table tr:hover {
+  background: rgba(250, 204, 21, 0.05);
+}
+
+/*======== INPUT DE NOTA ========*/
+.prof-grade-input {
+  width: 80px;
+  padding: 0.5rem;
+  text-align: center;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+  border-radius: 8px;
+  transition: border 0.2s ease;
+}
+
+.prof-grade-input:focus {
+  border-color: #facc15;
+  outline: none;
+}
+
+/*======== BOTÓN GUARDAR ========*/
+.prof-save-btn {
+  background: linear-gradient(135deg, #facc15, #eab308);
+  color: #0f172a;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.prof-save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 8px rgba(250, 204, 21, 0.4);
+}
+
+.prof-save-btn:disabled {
+  background: #6b7280;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/*======== RESPONSIVE ========*/
+
+/* --- Tablets (≤ 1024px) --- */
+@media (max-width: 1024px) {
+  .prof-course-container {
+    padding: 1.5rem;
+  }
+
+  .prof-table th, .prof-table td {
+    padding: 0.8rem;
+  }
+}
+
+/* --- Móviles grandes (≤ 768px) --- */
+@media (max-width: 768px) {
+  .prof-course-container {
+    padding: 1.3rem;
+  }
+
+  .prof-table th,
+  .prof-table td {
+    font-size: 0.85rem;
+  }
+
+  .prof-grade-input {
+    width: 60px;
+    padding: 0.4rem;
+  }
+
+  /* Ocultar columnas si se necesita */
+  .prof-table th:nth-child(2),
+  .prof-table td:nth-child(2) {
+    display: none;
+  }
+}
+
+/* --- Móviles pequeños (≤ 480px) --- */
+@media (max-width: 480px) {
+  .prof-course-container {
+    padding: 1rem;
+  }
+
+  .prof-table {
+    font-size: 0.8rem;
+  }
+
+  .prof-table th,
+  .prof-table td {
+    padding: 0.6rem;
+  }
+
+  .prof-grade-input {
+    width: 55px;
+  }
+
+  .prof-save-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+  }
+}

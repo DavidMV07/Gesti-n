@@ -15,6 +15,7 @@ import MyEnrollments from "./Pages/Student/MyEnrollments";
 import Courses from "./Pages/Courses";
 import CoursePage from "./Pages/CoursePage";
 import './App.css';
+import ProfessorCourseDetail from "./Pages/Professor/ProfessorCourseDetail";
 
 function App(){
   return (
@@ -51,6 +52,9 @@ function App(){
           } />
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:id" element={<CoursePage />} />
+          <Route path="/professor/courses/:id" element={
+            <ProtectedRoute role="profesor"><ProfessorCourseDetail /></ProtectedRoute>
+          } />
           <Route path="/my enrollments" element={
             <ProtectedRoute><MyEnrollments /></ProtectedRoute>
           } />
