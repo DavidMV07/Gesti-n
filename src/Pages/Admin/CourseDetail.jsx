@@ -1,9 +1,10 @@
-import { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useContext, useCallback } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import apiFetch from "../../utils/api";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function CourseDetail(){
+  const navigate = useNavigate();
   const { id } = useParams();
   const [course, setCourse] = useState(null);
   const [users, setUsers] = useState([]);
@@ -14,17 +15,17 @@ export default function CourseDetail(){
   const [courseEnrollments, setCourseEnrollments] = useState([]);
   const [gradeInputs, setGradeInputs] = useState({}); // { enrollmentId: { name, value } }
 
-  const fetchCourse = async () => {
+  const fetchCourse = useCallback(async () => {
     try { const data = await apiFetch(`/api/courses/${id}`, { method: 'GET' }); setCourse(data); }
     catch (err) { console.error(err); }
-  };
+  }, [id]);
 
   const fetchUsers = async () => {
-    try { const data = await apiFetch('/api/admin/users/users', { method: 'GET' }); setUsers(data || []); }
+    try { const data = await apiFetch('/api/admin/users', { method: 'GET' }); setUsers(data || []); }
     catch (err) { console.error(err); }
   };
 
-  useEffect(()=>{ fetchCourse(); fetchUsers(); }, [id]);
+  useEffect(()=>{ fetchCourse(); fetchUsers(); }, [fetchCourse, id]);
 
   useEffect(()=>{
     // Check if current user is enrolled in this course
@@ -35,8 +36,10 @@ export default function CourseDetail(){
         const found = (my || []).find(e => e.course && (e.course._id === id || e.course === id));
         if(found){ setIsEnrolled(true); setMyEnrollmentId(found._id); }
         else { setIsEnrolled(false); setMyEnrollmentId(null); }
-      } catch(err){ /* ignore */ }
-    };
+      } catch(err) {
+        console.error(err);
+      }
+    }
     fetchMy();
   }, [user, id]);
 
@@ -56,16 +59,16 @@ export default function CourseDetail(){
   const handleAdd = async () => {
     if(!selectedTeacher) { alert('Selecciona un docente'); return; }
     try {
-      await apiFetch(`/api/courses/${id}/teachers`, { method: 'POST', body: JSON.stringify({ teacherId: selectedTeacher }) });
+      await apiFetch(`/api/courses/${id}/profesor`, { method: 'POST', body: JSON.stringify({ profesorId: selectedTeacher }) });
       setSelectedTeacher('');
       fetchCourse();
     } catch (err) { console.error(err); alert('Error asignando docente'); }
   };
 
-  const handleRemove = async (teacherId) => {
+  const handleRemove = async (profesorId) => {
     if(!confirm('Quitar docente?')) return;
     try {
-      await apiFetch(`/api/courses/${id}/teachers/${teacherId}`, { method: 'DELETE' });
+      await apiFetch(`/api/courses/${id}/profesor/${profesorId}`, { method: 'DELETE' });
       fetchCourse();
     } catch (err) { console.error(err); alert('Error removiendo docente'); }
   };
@@ -126,22 +129,76 @@ export default function CourseDetail(){
         </div>
       )}
 
-      <h3>Docentes asignados</h3>
-      <ul>
-        {(course?.teachers || []).map(t => (
-          <li key={t._id}>{(t.firstName || t.lastName) ? `${t.firstName || ''} ${t.lastName || ''}`.trim() : t.email} ({t.role}) <button onClick={() => handleRemove(t._id)}>Quitar</button></li>
-        ))}
-      </ul>
+      <div className="teacher-container">
+        <h2 className="teacher-title">Docentes asignados</h2>
 
-      <h3>Asignar docente</h3>
-      <div>
-        <select value={selectedTeacher} onChange={e => setSelectedTeacher(e.target.value)}>
-          <option value="">-- seleccionar --</option>
-          {users.filter(u => u.role === 'profesor' || u.role === 'admin').map(u => (
-            <option key={u._id} value={u._id}>{(u.firstName || u.lastName) ? `${u.firstName || ''} ${u.lastName || ''}`.trim() : u.email} ({u.role})</option>
-          ))}
-        </select>
-        <button onClick={handleAdd} style={{ marginLeft: 8 }}>Asignar</button>
+        <table className="teacher-table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Rol</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {(course?.profesor || []).length > 0 ? (
+              (course?.profesor || []).map(p => (
+                <tr key={p._id}>
+                  <td>
+                    {(p.firstName || p.lastName)
+                      ? `${p.firstName || ''} ${p.lastName || ''}`.trim()
+                      : p.email}
+                  </td>
+
+                  <td>{p.role}</td>
+
+                  <td>
+                    <button
+                      className="btn-remove"
+                      onClick={() => handleRemove(p._id)}
+                    >
+                      Quitar
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3" style={{ textAlign: "center", padding: "15px" }}>
+                  No hay docentes asignados.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+
+        <h3 style={{ marginTop: 25, color: "#ffcf40", fontSize: 20 }}>Asignar docente</h3>
+
+        <div className="assign-box">
+          <select
+            value={selectedTeacher}
+            onChange={e => setSelectedTeacher(e.target.value)}
+          >
+            <option value="">-- seleccionar --</option>
+            {users
+              .filter(u => u.role === 'profesor')
+              .map(u => (
+                <option key={u._id} value={u._id}>
+                  {(u.firstName || u.lastName)
+                    ? `${u.firstName || ''} ${u.lastName || ''}`.trim()
+                    : u.email} ({u.role})
+                </option>
+              ))}
+          </select>
+
+          <button className="btn-assign" onClick={handleAdd}>
+            Asignar
+          </button>
+          <button className="btn-back" onClick={() => navigate(-1)}>
+            ⟵ Volver
+          </button>
+        </div>
       </div>
 
       {/* Teacher view: students and grades */}

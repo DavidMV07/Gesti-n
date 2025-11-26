@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../../styles/AdminUsersPage.css";
+import "../../styles/AdminGlobal.css";
 
 const AdminUsersPage = () => {
   const [users, setUsers] = useState([]);
@@ -20,9 +20,6 @@ const AdminUsersPage = () => {
 
   const token = localStorage.getItem("token");
 
-  // -----------------------------------
-  // GET USERS
-  // -----------------------------------
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -51,7 +48,7 @@ const AdminUsersPage = () => {
   // -----------------------------------
   const handleCreate = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/admin/users/", {
+      const res = await fetch("http://localhost:5000/api/admin/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -194,6 +191,7 @@ const AdminUsersPage = () => {
             <h3>Crear Usuario</h3>
 
             <input
+              className="modal input"
               type="text"
               placeholder="Nombre"
               value={newUser.firstName}
@@ -203,6 +201,7 @@ const AdminUsersPage = () => {
             />
 
             <input
+              className="modal input"
               type="text"
               placeholder="Apellido"
               value={newUser.lastName}
@@ -212,6 +211,7 @@ const AdminUsersPage = () => {
             />
 
             <input
+              className="modal input"
               type="email"
               placeholder="Email"
               value={newUser.email}
@@ -223,6 +223,7 @@ const AdminUsersPage = () => {
             <select
               value={newUser.role}
               onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+              className="modal select"
             >
               <option value="alumno">Alumno</option>
               <option value="profesor">Profesor</option>
@@ -248,6 +249,7 @@ const AdminUsersPage = () => {
             <h3>Editar Usuario</h3>
 
             <input
+              className="modal input"
               type="text"
               value={editingUser.firstName}
               onChange={(e) =>
@@ -256,6 +258,7 @@ const AdminUsersPage = () => {
             />
 
             <input
+              className="modal input"
               type="text"
               value={editingUser.lastName}
               onChange={(e) =>
@@ -264,6 +267,7 @@ const AdminUsersPage = () => {
             />
 
             <input
+              className="modal input"
               type="email"
               value={editingUser.email}
               onChange={(e) =>
@@ -272,6 +276,7 @@ const AdminUsersPage = () => {
             />
 
             <select
+              className="modal select"
               value={editingUser.role}
               onChange={(e) =>
                 setEditingUser({ ...editingUser, role: e.target.value })

@@ -30,7 +30,9 @@ export default function CoursePage(){
         const found = (my || []).find(e => e.course && (e.course._id === id || e.course === id));
         if(found){ setIsEnrolled(true); setMyEnrollmentId(found._id); }
         else { setIsEnrolled(false); setMyEnrollmentId(null); }
-      }catch(err){ /* ignore */ }
+      }catch(err){
+        console.error(err);
+      }
     };
     check();
   },[user, id]);
@@ -63,7 +65,7 @@ export default function CoursePage(){
     <div className="course-page">
       <h2>{course.title}</h2>
       <p>{course.description}</p>
-      <p><strong>Profesores:</strong> {(course.teachers || []).map(t => `${t.firstName||''} ${t.lastName||''} (${t.email})`).join(', ')}</p>
+      <p><strong>Profesores:</strong> {(course.profesor || []).map(p => `${p.firstName||''} ${p.lastName||''} (${p.email})`).join(', ')}</p>
 
       {user && user.role === 'alumno' && (
         <div style={{ marginTop: 12 }}>

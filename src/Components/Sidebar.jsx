@@ -58,7 +58,7 @@ export default function Sidebar() {
                 </>
               )}
               <li>
-                <button onClick={handleLogout}>Cerrar sesión</button>
+                <button onClick={handleLogout} className="btn-logout">Cerrar sesión</button>
               </li>
             </>
           ) : (

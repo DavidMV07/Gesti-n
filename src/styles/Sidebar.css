@@ -111,6 +111,19 @@
   color:#cbd5e1;
   font-size:0.75rem;
 }
+.btn-logout{
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+.btn-logout:hover {
+  background: rgba(239, 68, 68, 0.3);
+}
 /* ==== RESPONSIVE ==== */
 @media (max-width: 850px) {
   .navbar {
