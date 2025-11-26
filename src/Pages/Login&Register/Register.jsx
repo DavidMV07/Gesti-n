@@ -38,12 +38,12 @@ function Register() {
       <div className="register-card">
           <h2>Registrarse</h2>
           <form onSubmit={handleSubmit} className="Form__Register">
-            <label htmlFor="Nombres">Nombres: </label>
-            <input type="text" id="Nombres" name="nombres" placeholder="David Esteban" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-            <label htmlFor="Apellidos">Apellidos: </label>
-            <input type="text" id="Apellidos" name="apellidos" placeholder="Mellizo Vidal" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-            <label htmlFor="Email">Correo: </label>
-            <input type="Email" id="Email" name="email" placeholder="ejemplo@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+            <label htmlFor="firstName">Nombres: </label>
+            <input type="text" id="firstName" name="firstName" placeholder="David Esteban" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+            <label htmlFor="lastName">Apellidos: </label>
+            <input type="text" id="lastName" name="lastName" placeholder="Mellizo Vidal" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+            <label htmlFor="email">Correo: </label>
+            <input type="email" id="email" name="email" placeholder="ejemplo@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} required/>
             <label htmlFor="password">Contraseña: </label>
             <input type="password" id="password" name="password" placeholder="Tu contraseña" value={password} onChange={(e) => setPassword(e.target.value)} required/>
             <div className="Register__Buttons">

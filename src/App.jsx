@@ -22,7 +22,6 @@ function App(){
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
-          
           <Route path="/login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
