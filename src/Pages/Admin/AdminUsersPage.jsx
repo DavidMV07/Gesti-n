@@ -51,7 +51,7 @@ const AdminUsersPage = () => {
   // -----------------------------------
   const handleCreate = async () => {
     try {
-      const res = await fetch("//localhost:5000/api/admin/", {
+      const res = await fetch("http://localhost:5000/api/admin/users/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -101,9 +101,7 @@ const AdminUsersPage = () => {
 
       const data = await res.json();
 
-      setUsers(
-        users.map((u) => (u._id === editingUser._id ? data.user : u))
-      );
+      setUsers(users.map((u) => (u._id === editingUser._id ? data.user : u)));
 
       setShowEditModal(false);
       alert("Usuario actualizado");
@@ -119,13 +117,10 @@ const AdminUsersPage = () => {
     if (!window.confirm("¿Seguro que quieres eliminar este usuario?")) return;
 
     try {
-      const res = await fetch(
-        `http://localhost:5000/api/admin/users/${id}`,
-        {
-          method: "DELETE",
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const res = await fetch(`http://localhost:5000/api/admin/users/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       if (!res.ok) throw new Error("Error al eliminar usuario");
 
@@ -161,7 +156,9 @@ const AdminUsersPage = () => {
         <tbody>
           {users.map((user) => (
             <tr key={user._id}>
-              <td>{user.firstName} {user.lastName}</td>
+              <td>
+                {user.firstName} {user.lastName}
+              </td>
               <td>{user.email}</td>
               <td>{user.role}</td>
 
@@ -225,9 +222,7 @@ const AdminUsersPage = () => {
 
             <select
               value={newUser.role}
-              onChange={(e) =>
-                setNewUser({ ...newUser, role: e.target.value })
-              }
+              onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
             >
               <option value="alumno">Alumno</option>
               <option value="profesor">Profesor</option>
@@ -236,7 +231,9 @@ const AdminUsersPage = () => {
 
             <div className="modal-actions">
               <button onClick={handleCreate}>Crear</button>
-              <button onClick={() => setShowCreateModal(false)}>Cancelar</button>
+              <button onClick={() => setShowCreateModal(false)}>
+                Cancelar
+              </button>
             </div>
           </div>
         </div>
